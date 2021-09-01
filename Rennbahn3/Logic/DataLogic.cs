@@ -191,6 +191,16 @@ namespace Rennbahn3.Logic
             return races;
         }
 
+        public List<Race> GetRaces(Saison saison)
+        {
+            var races = RennbahnContext.Races
+                .Include(r => r.Saison)
+                .Include(r => r.Results)
+                .Where(r => r.Saison == saison)
+                .ToList();
+            return races;
+        }
+
         public void AddResult(Result result)
         {
             RennbahnContext.Add(result);

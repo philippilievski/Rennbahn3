@@ -20,22 +20,26 @@
             <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
-        <ComboBox
-            Name="comboBoxRace"
-            Grid.Row="0"
-            Grid.Column="0"
-            Width="200"
-            Height="30"
-            DisplayMemberPath="Name"
-            SelectionChanged="comboBoxRace_SelectionChanged" />
-        <ComboBox
-            Name="cmbBoxSeason"
-            Grid.Row="0"
-            Grid.Column="1"
-            Width="200"
-            Height="30"
-            DisplayMemberPath="Name"
-            SelectionChanged="comboBoxRace_SelectionChanged" />
+        <WrapPanel Grid.Row="0" Grid.Column="0">
+            <Label>Race</Label>
+            <ComboBox
+                Name="comboBoxRace"
+                Width="200"
+                Height="30"
+                DisplayMemberPath="Name"
+                SelectionChanged="comboBoxRace_SelectionChanged" />
+        </WrapPanel>
+        <WrapPanel Grid.Row="0" Grid.Column="1">
+            <Label>Season</Label>
+            <ComboBox
+                Name="cmbBoxSeason"
+                Grid.Row="0"
+                Grid.Column="1"
+                Width="200"
+                Height="30"
+                DisplayMemberPath="Name"
+                SelectionChanged="cmbBoxSeason_SelectionChanged" />
+        </WrapPanel>
         <Button
             Grid.Row="0"
             Grid.Column="2"
@@ -81,6 +85,13 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="1" Grid.Column="1">
+            <Button
+                Name="btnClearSelection"
+                Width="150"
+                Height="20"
+                Click="btnClearSelection_Click">
+                clear selection
+            </Button>
             <Button
                 Name="btnAddToResult"
                 Width="50"

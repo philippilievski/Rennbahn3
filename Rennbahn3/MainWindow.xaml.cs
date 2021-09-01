@@ -29,6 +29,7 @@ namespace Rennbahn3
             InitializeComponent();
             dgDrivers.ItemsSource = dataLogic.GetDrivers();
             comboBoxRace.ItemsSource = dataLogic.GetRaces();
+            cmbBoxSeason.ItemsSource = dataLogic.GetSaisons();
         }
 
         private void btnAddToResult_Click(object sender, RoutedEventArgs e)
@@ -89,6 +90,16 @@ namespace Rennbahn3
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             dataLogic.UpdatePoints();
+        }
+
+        private void cmbBoxSeason_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            comboBoxRace.ItemsSource = dataLogic.GetRaces((Saison)cmbBoxSeason.SelectedItem);
+        }
+
+        private void btnClearSelection_Click(object sender, RoutedEventArgs e)
+        {
+            cmbBoxSeason.SelectedIndex = -1;
         }
     }
 }
