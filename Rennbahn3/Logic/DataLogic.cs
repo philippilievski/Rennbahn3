@@ -53,6 +53,26 @@ namespace Rennbahn3.Logic
             return saisons;
         }
 
+        public List<Team> GetTeams()
+        {
+            var teams = RennbahnContext.Teams
+                .Include(t => t.Drivers)
+                .ToList();
+
+            return teams;
+        }
+
+        public void AddDriver(Driver driver)
+        {
+            RennbahnContext.Add(driver);
+            RennbahnContext.SaveChanges();
+        }
+
+        /// <summary>
+        /// Gets max position from results table
+        /// </summary>
+        /// <param name="race"></param>
+        /// <returns></returns>
         public int GetHighestPositionFromResults(Race race)
         {
             int highestposition = 0;
@@ -67,6 +87,10 @@ namespace Rennbahn3.Logic
             return highestposition;
         }
 
+        /// <summary>
+        /// Removes result from table
+        /// </summary>
+        /// <param name="result"></param>
         public void RemoveResult(Result result)
         {
             int pos = result.Position;
@@ -76,6 +100,11 @@ namespace Rennbahn3.Logic
             RennbahnContext.SaveChanges();
         }
 
+        /// <summary>
+        /// Moves all positions from preceding races one number closer to first position
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <param name="race"></param>
         public void RearrangePrecedingPositions(int pos, Race race)
         {
             int countraces = GetResults(race).Count;
@@ -93,6 +122,10 @@ namespace Rennbahn3.Logic
             }
         }
 
+        /// <summary>
+        /// Swaps position of input result with the position of preceding result
+        /// </summary>
+        /// <param name="result"></param>
         public void MoveUpPosition(Result result)
         {
             int precedingpos = 0;
@@ -108,6 +141,10 @@ namespace Rennbahn3.Logic
             }
         }
 
+        /// <summary>
+        /// Swaps position of input result with the position of succeeding result
+        /// </summary>
+        /// <param name="result"></param>
         public void MoveDownPosition(Result result)
         {
             int succeedingpos = 0;
@@ -123,6 +160,9 @@ namespace Rennbahn3.Logic
             }
         }
 
+        /// <summary>
+        /// Iterates through all the results and gives points to drivres
+        /// </summary>
         public void UpdatePoints()
         {
             List<Result> results = GetResults();
@@ -162,6 +202,11 @@ namespace Rennbahn3.Logic
             RennbahnContext.SaveChanges();
         }
 
+        /// <summary>
+        /// Finds the result with the position + 1 of the input result
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
         public Result GetSucceedingResult(Result result)
         {
             var res = RennbahnContext.Results
@@ -172,6 +217,11 @@ namespace Rennbahn3.Logic
             return res;
         }
 
+        /// <summary>
+        /// Finds the result with the position - 1 of the input result
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
         public Result GetPrecedingResult(Result result)
         {
             var res = RennbahnContext.Results
@@ -182,6 +232,10 @@ namespace Rennbahn3.Logic
             return res;
         }
 
+        /// <summary>
+        /// Writes all races to list
+        /// </summary>
+        /// <returns>List of Races</returns>
         public List<Race> GetRaces()
         {
             var races = RennbahnContext.Races
@@ -191,6 +245,11 @@ namespace Rennbahn3.Logic
             return races;
         }
 
+        /// <summary>
+        /// Writes all races of a specific saison to list
+        /// </summary>
+        /// <param name="saison"></param>
+        /// <returns>List of races</returns>
         public List<Race> GetRaces(Saison saison)
         {
             var races = RennbahnContext.Races
@@ -201,6 +260,10 @@ namespace Rennbahn3.Logic
             return races;
         }
 
+        /// <summary>
+        /// Add result to database
+        /// </summary>
+        /// <param name="result"></param>
         public void AddResult(Result result)
         {
             RennbahnContext.Add(result);

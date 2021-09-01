@@ -58,6 +58,11 @@ namespace Rennbahn3
             SortDataGrid();
         }
 
+        /// <summary>
+        /// Moves up the position of a driver
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnMoveUpPosition_Click(object sender, RoutedEventArgs e)
         {
             dataLogic.MoveUpPosition((Result)dgResult.SelectedItem);
@@ -65,6 +70,9 @@ namespace Rennbahn3
             SortDataGrid();
         }
 
+        /// <summary>
+        /// Sorts the result datagrid by position
+        /// </summary>
         public void SortDataGrid()
         {
             ListSortDirection listSortDirection = new ListSortDirection();
@@ -80,6 +88,12 @@ namespace Rennbahn3
             dgResult.Items.Refresh();
         }
 
+
+        /// <summary>
+        /// Moves down the position of a driver 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnMoveDownPosition_Click(object sender, RoutedEventArgs e)
         {
             dataLogic.MoveDownPosition((Result)dgResult.SelectedItem);
@@ -100,6 +114,13 @@ namespace Rennbahn3
         private void btnClearSelection_Click(object sender, RoutedEventArgs e)
         {
             cmbBoxSeason.SelectedIndex = -1;
+            comboBoxRace.ItemsSource = dataLogic.GetRaces();
+        }
+
+        private void btnAddDriver_Click(object sender, RoutedEventArgs e)
+        {
+            AddDriver addDriver = new AddDriver();
+            addDriver.ShowDialog();
         }
     }
 }

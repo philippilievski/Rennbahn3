@@ -41,10 +41,12 @@
                 SelectionChanged="cmbBoxSeason_SelectionChanged" />
         </WrapPanel>
         <Button
+            Name="btnAddDriver"
             Grid.Row="0"
             Grid.Column="2"
             Width="120"
-            Height="30">
+            Height="30"
+            Click="btnAddDriver_Click">
             Add
         </Button>
         <DataGrid
@@ -115,7 +117,7 @@
             Grid.Column="1"
             Margin="10"
             Click="btnSave_Click">
-            Save
+            Update Points
         </Button>
     </Grid>
 </Window>
