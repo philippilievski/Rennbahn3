@@ -28,6 +28,14 @@
             Height="30"
             DisplayMemberPath="Name"
             SelectionChanged="comboBoxRace_SelectionChanged" />
+        <ComboBox
+            Name="cmbBoxSeason"
+            Grid.Row="0"
+            Grid.Column="1"
+            Width="200"
+            Height="30"
+            DisplayMemberPath="Name"
+            SelectionChanged="comboBoxRace_SelectionChanged" />
         <Button
             Grid.Row="0"
             Grid.Column="2"
@@ -91,9 +99,11 @@
             </Button>
         </StackPanel>
         <Button
+            Name="btnSave"
             Grid.Row="2"
             Grid.Column="1"
-            Margin="10">
+            Margin="10"
+            Click="btnSave_Click">
             Save
         </Button>
     </Grid>

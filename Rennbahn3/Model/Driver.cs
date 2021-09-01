@@ -10,6 +10,7 @@ namespace Rennbahn3.Model
     {
         public int DriverID { get; set; }
         public string Name { get; set; }
+        public int Points { get; set; }
         public Saison Saison { get; set; }
         public Team Team { get; set; }
         public List<Result> Results { get; set; }

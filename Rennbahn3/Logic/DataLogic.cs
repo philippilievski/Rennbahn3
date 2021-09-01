@@ -42,17 +42,16 @@ namespace Rennbahn3.Logic
 
             return results;
         }
-        //Unused
-        /*
-        public int GetHighestPositionFromResults()
-        {
-            int highestposition = RennbahnContext.Results
-                .Select(r => r.Position)
-                .Max();
 
-            return highestposition;
+        public List<Saison> GetSaisons()
+        {
+            var saisons = RennbahnContext.Saisons
+                .Include(s => s.Drivers)
+                .Include(s => s.Races)
+                .ToList();
+
+            return saisons;
         }
-        */
 
         public int GetHighestPositionFromResults(Race race)
         {
@@ -122,6 +121,45 @@ namespace Rennbahn3.Logic
                 result.Position = succeedingpos;
                 RennbahnContext.SaveChanges();
             }
+        }
+
+        public void UpdatePoints()
+        {
+            List<Result> results = GetResults();
+            List<Driver> drivers = GetDrivers();
+
+            foreach (var driver in drivers)
+            {
+                driver.Points = 0;
+            }
+            foreach(var result in results)
+            {
+                switch (result.Position)
+                {
+                    case 1:
+                        result.Driver.Points += 10;
+                        break;
+                    case 2:
+                        result.Driver.Points += 8;
+                        break;
+                    case 3:
+                        result.Driver.Points += 7;
+                        break;
+                    case 4:
+                        result.Driver.Points += 6;
+                        break;
+                    case 5:
+                        result.Driver.Points += 3;
+                        break;
+                    case 6:
+                        result.Driver.Points += 1;
+                        break;
+                    default:
+                        result.Driver.Points += 0;
+                        break;
+                }
+            }
+            RennbahnContext.SaveChanges();
         }
 
         public Result GetSucceedingResult(Result result)

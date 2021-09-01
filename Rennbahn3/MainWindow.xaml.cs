@@ -85,5 +85,10 @@ namespace Rennbahn3
             dgResult.ItemsSource = dataLogic.GetResults((Race)comboBoxRace.SelectedItem);
             SortDataGrid();
         }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            dataLogic.UpdatePoints();
+        }
     }
 }
